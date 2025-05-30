@@ -2,6 +2,7 @@ package dvb
 
 import (
 	"context"
+	"errors"
 	"net/url"
 	"strconv"
 )
@@ -24,11 +25,6 @@ type MonitorStopResponse struct {
 	Departures     []Departure `json:"Departures"`
 }
 
-type Status struct {
-	Code    string `json:"Code"`
-	Message string `json:"Message"`
-}
-
 type Departure struct {
 	Id            string   `json:"Id"`
 	DlId          string   `json:"DlId"`
@@ -45,43 +41,33 @@ type Departure struct {
 	Occupancy     string   `json:"Occupancy"`
 }
 
-type Platform struct {
-	Name string `json:"Name"`
-	Type string `json:"Type"`
-}
-
-type Diva struct {
-	Number  string `json:"Number"`
-	Network string `json:"Network"`
-}
-
 // Monitor a single stop to see every bus or tram leaving this stop after the specified time offset.
 func (c *Client) MonitorStop(ctx context.Context, options *MonitorStopOptions) (*MonitorStopResponse, error) {
 	query := url.Values{}
 
 	if options != nil {
-		if options.Format != nil && *options.Format != "" {
-			query.Set("format", *options.Format)
-		}
 		if options.StopId != "" {
 			query.Set("stopid", options.StopId)
+		} else {
+			return nil, errors.New("stopid can not be empty")
+		}
+		if options.Format != nil && *options.Format != "" {
+			query.Set("format", *options.Format)
 		}
 		if options.Time != nil && *options.Time != "" {
 			query.Set("time", *options.Time)
 		}
-		if options.IsArrival != nil && !*options.IsArrival {
+		if options.IsArrival != nil {
 			query.Set("isarrival", strconv.FormatBool(*options.IsArrival))
 		}
 		if options.Limit != nil && *options.Limit > 0 {
 			query.Set("limit", strconv.Itoa(*options.Limit))
 		}
-		if options.ShortTermChanges != nil && *options.ShortTermChanges {
+		if options.ShortTermChanges != nil {
 			query.Set("shorttermchanges", strconv.FormatBool(*options.ShortTermChanges))
 		}
-		if options.MentzOnly != nil && !*options.MentzOnly {
+		if options.MentzOnly != nil {
 			query.Set("mentzonly", strconv.FormatBool(*options.MentzOnly))
-		} else {
-			query.Set("mentzonly", "false")
 		}
 	}
 
