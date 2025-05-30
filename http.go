@@ -10,25 +10,15 @@ import (
 	"net/url"
 )
 
-type HTTPMethod string
-
-const (
-	GET    HTTPMethod = "GET"
-	POST   HTTPMethod = "POST"
-	PUT    HTTPMethod = "PUT"
-	DELETE HTTPMethod = "DELETE"
-	PATCH  HTTPMethod = "PATCH"
-)
-
-type RequestOptions struct {
-	Method  HTTPMethod
+type requestOptions struct {
+	Method  string
 	Path    string
 	Query   url.Values
 	Body    interface{}
 	Headers map[string]string
 }
 
-func (c *Client) doRequest(ctx context.Context, opts RequestOptions) (*http.Response, error) {
+func (c *Client) doRequest(ctx context.Context, opts requestOptions) (*http.Response, error) {
 	u, err := url.Parse(c.baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("invalid base URL: %w", err)
@@ -102,16 +92,16 @@ func (c *Client) handleResponse(resp *http.Response, target interface{}) error {
 func (c *Client) handleErrorResponse(resp *http.Response) error {
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return &APIError{
+		return &apiError{
 			StatusCode: resp.StatusCode,
 			Message:    fmt.Sprintf("HTTP %d: failed to read error response", resp.StatusCode),
 		}
 	}
 
-	var apiErr APIError
+	var apiErr apiError
 	if err := json.Unmarshal(body, &apiErr); err != nil {
 		// If we can't unmarshal the error, create a generic one
-		return &APIError{
+		return &apiError{
 			StatusCode: resp.StatusCode,
 			Message:    fmt.Sprintf("HTTP %d: %s", resp.StatusCode, string(body)),
 		}

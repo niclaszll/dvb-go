@@ -31,7 +31,6 @@ func monitorStopExample(ctx context.Context, client *dvb.Client) {
 	fmt.Println("=== Dresden Transport Monitor Example ===")
 	fmt.Println()
 
-	// Monitor Dresden Hauptbahnhof (stop ID: 33000028)
 	stopID := "33000028"
 	limit := 10
 

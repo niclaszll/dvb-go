@@ -3,6 +3,7 @@ package dvb
 import (
 	"context"
 	"errors"
+	"net/http"
 	"net/url"
 )
 
@@ -51,8 +52,8 @@ func (c *Client) GetLines(ctx context.Context, options *GetLinesOptions) (*GetLi
 
 	}
 
-	opts := RequestOptions{
-		Method: GET,
+	opts := requestOptions{
+		Method: http.MethodGet,
 		Path:   "/stt/lines",
 		Query:  query,
 	}

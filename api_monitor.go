@@ -3,6 +3,7 @@ package dvb
 import (
 	"context"
 	"errors"
+	"net/http"
 	"net/url"
 	"strconv"
 )
@@ -71,8 +72,8 @@ func (c *Client) MonitorStop(ctx context.Context, options *MonitorStopOptions) (
 		}
 	}
 
-	opts := RequestOptions{
-		Method: GET,
+	opts := requestOptions{
+		Method: http.MethodGet,
 		Path:   "/dm",
 		Query:  query,
 	}

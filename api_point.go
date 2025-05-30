@@ -3,6 +3,7 @@ package dvb
 import (
 	"context"
 	"errors"
+	"net/http"
 	"net/url"
 	"strconv"
 )
@@ -50,8 +51,8 @@ func (c *Client) GetPoint(ctx context.Context, options *GetPointOptions) (*GetPo
 		}
 	}
 
-	opts := RequestOptions{
-		Method: GET,
+	opts := requestOptions{
+		Method: http.MethodGet,
 		Path:   "/tr/pointfinder",
 		Query:  query,
 	}

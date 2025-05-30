@@ -3,6 +3,7 @@ package dvb
 import (
 	"context"
 	"errors"
+	"net/http"
 	"net/url"
 	"strconv"
 )
@@ -143,8 +144,8 @@ func (c *Client) GetRoute(ctx context.Context, options *GetRouteOptions) (*GetRo
 		}
 	}
 
-	opts := RequestOptions{
-		Method: GET,
+	opts := requestOptions{
+		Method: http.MethodGet,
 		Path:   "/tr/trips",
 		Query:  query,
 	}
