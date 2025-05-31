@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-type MonitorStopOptions struct {
+type MonitorStopParams struct {
 	StopId           string
 	Format           *string
 	Time             *string
@@ -43,7 +43,7 @@ type Departure struct {
 }
 
 // Monitor a single stop to see every bus or tram leaving this stop after the specified time offset.
-func (c *Client) MonitorStop(ctx context.Context, options *MonitorStopOptions) (*MonitorStopResponse, error) {
+func (c *Client) MonitorStop(ctx context.Context, options *MonitorStopParams) (*MonitorStopResponse, error) {
 	query := url.Values{}
 
 	if options != nil {

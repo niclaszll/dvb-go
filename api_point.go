@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-type GetPointOptions struct {
+type GetPointParams struct {
 	Query         string
 	Format        *string
 	StopsOnly     *bool
@@ -25,7 +25,7 @@ type GetPointResponse struct {
 }
 
 // Get a point by query
-func (c *Client) GetPoint(ctx context.Context, options *GetPointOptions) (*GetPointResponse, error) {
+func (c *Client) GetPoint(ctx context.Context, options *GetPointParams) (*GetPointResponse, error) {
 	query := url.Values{}
 
 	if options != nil {

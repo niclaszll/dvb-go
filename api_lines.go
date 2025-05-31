@@ -7,7 +7,7 @@ import (
 	"net/url"
 )
 
-type GetLinesOptions struct {
+type GetLinesParams struct {
 	StopId string
 	Format *string
 }
@@ -37,7 +37,7 @@ type TimeTable struct {
 }
 
 // Get a list of available tram/bus lines for a stop
-func (c *Client) GetLines(ctx context.Context, options *GetLinesOptions) (*GetLinesResponse, error) {
+func (c *Client) GetLines(ctx context.Context, options *GetLinesParams) (*GetLinesResponse, error) {
 	query := url.Values{}
 
 	if options != nil {

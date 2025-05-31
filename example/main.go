@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"dvb-go"
+	"github.com/niclaszll/dvb-go"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func monitorStopExample(ctx context.Context, client *dvb.Client) {
 	stopID := "33000028"
 	limit := 10
 
-	options := &dvb.MonitorStopOptions{
+	options := &dvb.MonitorStopParams{
 		StopId: stopID,
 		Limit:  &limit,
 	}
@@ -83,7 +83,7 @@ func getLinesExample(ctx context.Context, client *dvb.Client) {
 	fmt.Println()
 
 	stopID := "33000028"
-	linesOptions := &dvb.GetLinesOptions{
+	linesOptions := &dvb.GetLinesParams{
 		StopId: stopID,
 	}
 
@@ -134,7 +134,7 @@ func getRouteExample(ctx context.Context, client *dvb.Client) {
 	origin := "33000742"
 	destination := "33000037"
 
-	routeOptions := &dvb.GetRouteOptions{
+	routeOptions := &dvb.GetRouteParams{
 		Origin:      origin,
 		Destination: destination,
 	}
@@ -190,7 +190,7 @@ func getPointExample(ctx context.Context, client *dvb.Client) {
 	query := "Dresden Hauptbahnhof"
 	limit := 1
 
-	pointOptions := &dvb.GetPointOptions{
+	pointOptions := &dvb.GetPointParams{
 		Query: query,
 		Limit: &limit,
 	}

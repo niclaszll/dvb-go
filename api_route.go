@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-type GetRouteOptions struct {
+type GetRouteParams struct {
 	Origin           string
 	Destination      string
 	Format           *string
@@ -113,7 +113,7 @@ type Ticket struct {
 }
 
 // Get a route between two stops
-func (c *Client) GetRoute(ctx context.Context, options *GetRouteOptions) (*GetRouteResponse, error) {
+func (c *Client) GetRoute(ctx context.Context, options *GetRouteParams) (*GetRouteResponse, error) {
 	query := url.Values{}
 
 	if options != nil {
