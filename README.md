@@ -5,7 +5,7 @@
 [![GitHub release](https://img.shields.io/github/release/niclaszll/dvb-go.svg)](https://github.com/niclaszll/dvb-go/releases)
 [![Release Workflow](https://github.com/niclaszll/dvb-go/actions/workflows/release.yml/badge.svg)](https://github.com/niclaszll/dvb-go/actions)
 
-A Go client for the Dresden Transport (DVB) API. This library provides easy access to real-time public transport information for Dresden, Germany.
+Unofficial Go client for the Dresden Transport (DVB) API. This library provides easy access to real-time public transport information for Dresden, Germany.
 
 ## Installation
 
