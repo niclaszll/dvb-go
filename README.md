@@ -49,19 +49,19 @@ func main() {
 
 ## Available Endpoints
 
-### `client.MonitorStop(ctx, options)`
+### `MonitorStop`
 
 Get real-time departures and arrivals for a specific stop.
 
-### `client.GetRoute(ctx, options)`
+### `GetRoute`
 
 Find routes between two locations with journey planning.
 
-### `client.GetLines(ctx, options)`
+### `GetLines`
 
 Get all available transport lines serving a stop.
 
-### `client.GetPoint(ctx, options)`
+### `GetPoint`
 
 Search for stops and locations by name or query.
 
